@@ -52,7 +52,9 @@ def ask_jarvis():
         "response": ai_response
     })
 
-if __name__ == "__main__":
-    print("🌍 JARVIS API চালু হচ্ছে...")
-    # পিন্ডো বা লোকাল হোস্ট থেকে এক্সেস করার জন্য
-    app.run(host='0.0.0.0', port=5000)
+app = Flask(__name__)
+
+# ... আপনার বাকি সব কোড ...
+
+# ফাইলের একদম শেষে শুধু এই লাইনটি থাকবে (app.run দরকার নেই)
+# app.run() বাদ দিন
