@@ -1,4 +1,5 @@
 import requests
+import os
 from flask import Flask, request, jsonify
 
 app = Flask(__name__)
@@ -38,9 +39,12 @@ def query_jarvis_ai(prompt):
 
 # --- API Endpoints ---
 
+@app.route('/')
+def home():
+    return "<h1>JARVIS API ইজ অনলাইন! ✅</h1>"
+
 @app.route('/ask', methods=['GET'])
 def ask_jarvis():
-    # URL থেকে প্রশ্ন নিবে: /ask?query=কেমন আছো?
     user_query = request.args.get('query')
     if not user_query:
         return jsonify({"error": "No query provided"}), 400
@@ -52,9 +56,7 @@ def ask_jarvis():
         "response": ai_response
     })
 
-app = Flask(__name__)
-
-# ... আপনার বাকি সব কোড ...
-
-# ফাইলের একদম শেষে শুধু এই লাইনটি থাকবে (app.run দরকার নেই)
-# app.run() বাদ দিন
+# Render বা Vercel এ চালানোর জন্য নিচের অংশটি এভাবে রাখা ভালো
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host='0.0.0.0', port=port)
